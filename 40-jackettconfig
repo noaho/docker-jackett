@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+# If config doesn't exist yet, start hydra2 for 10 seconds to build config, then stop.
+if ! [ -f /config/Jackett/ServerConfig.json ]; then
+	#Start
+	/etc/services.d/jackett/run &
+	sleep 30
+	kill $!
+	sleep 20
+fi
+
+#Set urlbase settings
+jq -r '."BasePathOverride" |= "/jackett"' /config/Jackett/ServerConfig.json >temp.json && mv temp.json /config/Jackett/ServerConfig.json
+
+#Set SABnzbd apikey
+#sabAPI=$(cat /sabnzbdconfig/sabnzbd.ini | grep -m1 "api_key = ................................" | cut -d, -f2 | grep "api_key = ................................" | cut -d= -f2)
+
+#sed -i "/\[SABnzbd\]/,/^$/ s/sab_apikey = .*/sab_apikey = $sabAPI/" /config/config.ini
