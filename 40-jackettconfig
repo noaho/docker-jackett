@@ -10,7 +10,7 @@ if ! [ -f /config/Jackett/ServerConfig.json ]; then
 fi
 
 #Set urlbase settings
-jq -r '."BasePathOverride" |= "/jackett"' /config/Jackett/ServerConfig.json >temp.json && mv temp.json /config/Jackett/ServerConfig.json
+#jq -r '."BasePathOverride" |= "/jackett"' /config/Jackett/ServerConfig.json >temp.json && mv temp.json /config/Jackett/ServerConfig.json
 
 #Set SABnzbd apikey
 #sabAPI=$(cat /sabnzbdconfig/sabnzbd.ini | grep -m1 "api_key = ................................" | cut -d, -f2 | grep "api_key = ................................" | cut -d= -f2)
